@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thief Detection System</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            margin-top: 60px;
+            background: white;
+            padding: 30px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+        h1 {
+            font-weight: bold;
+            color: #007bff;
+            text-align: center;
+        }
+        .form-group label {
+            font-weight: 500;
+            color: #333;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+        .video-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        #videoPreview {
+            width: 100%;
+            max-width: 650px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            border: 5px solid #007bff;
+            background-color: #e9ecef;
+        }
+        h3 {
+            color: #28a745;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px 0;
+            background-color: #343a40;
+            color: white;
+        }
+        .footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thief Detection System</h1>
+        
+        <!-- Video upload form -->
+        <form method="post" enctype="multipart/form-data" action="{% url 'predict_video' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="filePath">Upload Video File Here:</label>
+                <input name="filePath" type="file" class="form-control-file" accept="video/*" id="videoInput" onchange="previewVideo()">
+            </div>
+
+            <!-- Preview the uploaded video -->
+            <div class="video-container">
+                <video id="videoPreview" controls style="display: none;">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <!-- Display prediction result -->
+            {% if prediction %}
+            <h3 class="text-center mt-4">Prediction: <strong>{{ prediction }}</strong></h3>
+            {% endif %}
+            
+            <div class="form-group mt-4">
+                <input type="submit" value="Submit" class="btn btn-primary btn-submit">
+            </div>
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Thief Detection System</p>
+    </div>
+
+    <!-- JavaScript to preview the video -->
+    <script>
+        function previewVideo() {
+            var videoInput = document.getElementById('videoInput');
+            var videoPreview = document.getElementById('videoPreview');
+            var file = videoInput.files[0];
+            
+            if (file) {
+                var fileURL = URL.createObjectURL(file);
+                videoPreview.src = fileURL;
+                videoPreview.style.display = 'block';
+            } else {
+                videoPreview.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
