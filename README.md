@@ -17,21 +17,18 @@ This project aims to build a machine learning-based system that detects the pres
 ```bash
 thief-detection-project/
 │
-├── data/
-│   └── train/           # Training dataset (images or videos)
-│   └── test/            # Testing dataset (images or videos)
-│
+├── Shop DataSet/
 ├── models/
-│   └── thief_detection_model.h5  # Pre-trained machine learning model
+│   └── model.pth  # Pre-trained machine learning model
 │
 ├── notebooks/
-│   └── training.ipynb    # Jupyter notebook for model training
-│   └── evaluation.ipynb  # Jupyter notebook for model evaluation
+│   └── pretrained video classification.ipynb    # Jupyter notebook for model training
+│   └── thief detection model.ipynb  # Jupyter notebook for model evaluation
 │
-├── scripts/
-│   └── preprocess_data.py  # Script to preprocess input data (resize, normalize, etc.)
-│   └── detect_thief.py     # Script to run detection on live or recorded footage
-│
+├── VideoClassificationDeployment/
+|   └── media  # contains the saved videos used for testing the model
+|   └──templates # contains the ront end with style (home.html)
+│   └── VideoClassificationDeployment #contains the main files.py
 ├── README.md              # Project documentation
 ├── requirements.txt       # Python dependencies
 └── thief_detection.py     # Main program to run the detection
